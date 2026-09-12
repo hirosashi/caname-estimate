@@ -8,7 +8,7 @@ import urllib.parse
 import urllib.request
 import http.cookiejar
 
-BASE = 'http://127.0.0.1:8088'
+BASE = os.environ.get('KANAME_BASE', 'http://127.0.0.1:8088')
 jar = http.cookiejar.CookieJar()
 op = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
 

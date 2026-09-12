@@ -23,3 +23,9 @@ find src tests tools -name '*.php' -print0 | xargs -0 -n1 php -l | grep -v '^No 
 php tests/calc_test.php
 python3 tests/smoke_post.py 2   # サーバ起動後
 ```
+
+## 共通開発サイト（さくら）への反映
+- URL: https://jyunbi.sakura.ne.jp/caname （配置先 `/home/jyunbi/www/caname/`、`config/config.php` はサーバ側のみ・Git管理外）
+- 反映: `SAKURA_SSH_HOST/USER` と鍵 `~/.ssh/sakura_key` を用意して `./deploy.sh`
+- 反映後の確認: `KANAME_BASE=https://jyunbi.sakura.ne.jp/caname python3 tests/smoke_post.py 1`
+- スキーマ変更は `db/schema.sql` に ALTER/CREATE を追記し、ローカル → 開発サイトの順に適用（DROP禁止）
