@@ -1,0 +1,25 @@
+# カナメ 見積・実行予算システム（PHP + MySQL）
+
+Excel「見積実行予算作成ツール」をWeb化したもの。素のPHP 8.1 + PDO、Composer不使用。
+
+## 構成
+- `src/index.php` ルート定義・エントリ / `src/app/{Core,Controllers,Services,Views}`
+- `db/schema.sql` スキーマ正本 / `db/seed_real.sql` Excel由来マスタ（品目2,533・カテゴリ39・特記事項27・選択肢・サンプル案件）
+- `tools/build_seed.py` Excel(`tools/source/見積実行予算作成ツール*.xlsx`) → seed_real.sql 生成（openpyxl）
+- `tests/calc_test.php` 明細書計算のExcel突合 / `tests/smoke_post.py` 保存系ルートの往復検査
+- `docs/excel_analysis.md` 元Excelの解析メモ
+
+## ローカル起動
+```bash
+cp src/config/config.sample.php src/config/config.local.php   # DB接続を編集
+mysql kaname_dev < db/schema.sql && mysql kaname_dev < db/seed_real.sql
+php -S 127.0.0.1:8088 -t src dev_router.php
+```
+初期管理者 `admin`（パスワードは seed 生成時の `KANAME_ADMIN_PW`。初回ログイン後に変更）。
+
+## 検査
+```bash
+find src tests tools -name '*.php' -print0 | xargs -0 -n1 php -l | grep -v '^No syntax errors'
+php tests/calc_test.php
+python3 tests/smoke_post.py 2   # サーバ起動後
+```
