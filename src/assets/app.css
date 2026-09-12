@@ -1,0 +1,63 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic UI",Meiryo,sans-serif;font-size:14px;color:#222;background:#f3f4f6}
+a{color:#1d4ed8}
+.top{display:flex;align-items:center;gap:20px;background:#1f2937;color:#fff;padding:0 16px;height:46px}
+.top .brand{color:#fff;font-weight:bold;text-decoration:none;font-size:15px}
+.gnav a{color:#d1d5db;text-decoration:none;margin-right:14px;padding:14px 0;display:inline-block}
+.gnav a.on,.gnav a:hover{color:#fff;border-bottom:2px solid #f59e0b}
+.me{margin-left:auto;color:#d1d5db;font-size:12px}
+.me a{color:#fff;margin-left:8px}
+.inline{display:inline}
+button.link{background:none;border:0;color:#fff;cursor:pointer;text-decoration:underline;font-size:12px;margin-left:8px}
+.projbar{background:#fff;border-bottom:1px solid #d1d5db;padding:8px 16px 0;display:flex;align-items:flex-end;gap:20px}
+.projbar .pname{font-weight:bold;padding-bottom:10px;max-width:38%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tabs a{display:inline-block;padding:8px 14px;text-decoration:none;color:#374151;border:1px solid transparent;border-bottom:0;border-radius:6px 6px 0 0}
+.tabs a.on{background:#f3f4f6;border-color:#d1d5db;font-weight:bold;color:#111}
+.page{padding:16px;max-width:1500px;margin:0 auto}
+.page.narrow{max-width:420px;margin-top:80px}
+.card{background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:14px 16px;margin-bottom:14px}
+.card h2{font-size:15px;margin:0 0 10px;border-left:4px solid #f59e0b;padding-left:8px}
+.flash{padding:8px 12px;border-radius:4px;margin-bottom:10px}
+.flash.ok{background:#dcfce7;color:#166534}
+.flash.error{background:#fee2e2;color:#991b1b}
+.flash.warn{background:#fef3c7;color:#92400e}
+table.grid{border-collapse:collapse;width:100%;background:#fff}
+table.grid th,table.grid td{border:1px solid #d1d5db;padding:3px 5px;font-size:12.5px;vertical-align:middle}
+table.grid th{background:#e5e7eb;font-weight:normal;text-align:center;white-space:nowrap}
+table.grid td.num,table.grid th.num{text-align:right;white-space:nowrap}
+table.grid tr.sub td{background:#fef9c3;font-weight:bold}
+table.grid tr.merged td{background:#f8fafc;color:#64748b}
+table.grid td.calc{background:#f9fafb;color:#374151}
+input[type=text],input[type=number],input[type=date],input[type=password],select,textarea{border:1px solid #9ca3af;border-radius:3px;padding:4px 6px;font-size:13px;font-family:inherit}
+input.num{text-align:right}
+table.grid input{width:100%;padding:2px 4px;font-size:12.5px}
+table.grid input.xs{width:56px}
+table.grid input.s{width:80px}
+table.grid input.m{width:120px}
+textarea{width:100%}
+.btn{display:inline-block;background:#1d4ed8;color:#fff;border:0;border-radius:4px;padding:6px 14px;cursor:pointer;font-size:13px;text-decoration:none}
+.btn.sec{background:#6b7280}
+.btn.warn{background:#b91c1c}
+.btn.sm{padding:3px 8px;font-size:12px}
+.row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end}
+.row label{display:block;font-size:12px;color:#4b5563}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px 16px}
+.form-grid label{display:block;font-size:12px;color:#4b5563;margin-bottom:2px}
+.form-grid input,.form-grid select{width:100%}
+.form-grid .wide{grid-column:1/-1}
+.muted{color:#6b7280;font-size:12px}
+.right{text-align:right}
+.big{font-size:18px;font-weight:bold}
+.section-nav a{display:inline-block;margin:0 6px 6px 0;padding:4px 10px;border:1px solid #d1d5db;border-radius:14px;background:#fff;text-decoration:none;color:#374151;font-size:12px}
+.section-nav a.on{background:#1f2937;color:#fff;border-color:#1f2937}
+.kv{width:auto}
+.kv th{text-align:left;background:#f3f4f6;width:220px}
+.kv td{text-align:right;min-width:140px}
+#picker{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:50}
+#picker.open{display:flex}
+#picker .box{background:#fff;width:920px;max-width:96vw;max-height:88vh;display:flex;flex-direction:column;border-radius:6px;overflow:hidden}
+#picker .head{padding:10px;display:flex;gap:8px;border-bottom:1px solid #d1d5db}
+#picker .head input[type=text]{flex:1}
+#picker .list{overflow:auto;padding:0 10px 10px}
+#picker table tr:hover td{background:#eff6ff;cursor:pointer}
+.sticky-actions{position:sticky;bottom:0;background:#fff;border-top:1px solid #d1d5db;padding:8px;margin:0 -16px -14px;text-align:right}
