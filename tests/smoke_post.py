@@ -8,7 +8,7 @@ import urllib.parse
 import urllib.request
 import http.cookiejar
 
-BASE = os.environ.get('KANAME_BASE', 'http://127.0.0.1:8088')
+BASE = os.environ.get('CANAME_BASE', 'http://127.0.0.1:8088')
 jar = http.cookiejar.CookieJar()
 op = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
 
@@ -81,7 +81,7 @@ def check(label, res, expect_prefix):
 
 results = []
 lp = get('/login')
-results.append(check('login', post('/login', [('_token', token(lp)), ('login_id', 'admin'), ('password', os.environ.get('KANAME_ADMIN_PW', 'kaname2026'))]), '/'))
+results.append(check('login', post('/login', [('_token', token(lp)), ('login_id', 'admin'), ('password', os.environ.get('CANAME_ADMIN_PW', 'caname2026'))]), '/'))
 pid = int(sys.argv[1]) if len(sys.argv) > 1 else 2
 
 # 案件ヘッダ保存（往復）

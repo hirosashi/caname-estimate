@@ -18,7 +18,7 @@ final class Session
             'secure' => $secure,
             'samesite' => 'Lax',
         ]);
-        session_name('KANAMESESS');
+        session_name('CANAMESESS');
         session_start();
     }
 

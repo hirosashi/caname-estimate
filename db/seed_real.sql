@@ -2,7 +2,7 @@
 SET NAMES utf8mb4;
 SET @now = NOW();
 INSERT INTO users (login_id, name, password_hash, role, is_active, must_change_pw, created_at, updated_at)
-SELECT 'admin', '管理者', '$2y$10$/RvLdjErzErMLBJblU/DT.02k0IED0cghSYnSpPaj/WpabcsWaOMq', 'admin', 1, 0, @now, @now FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM users WHERE login_id='admin');
+SELECT 'admin', '管理者', '$2y$10$w7su15Cn5BLbMkrjgfebA.ibD3Y.d/r4z4IEPcAcIBP3VdOkflA9S', 'admin', 1, 0, @now, @now FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM users WHERE login_id='admin');
 INSERT INTO categories (sort_no, name) VALUES (1, 'タイマルーフＭ型') ON DUPLICATE KEY UPDATE sort_no=VALUES(sort_no);
 INSERT INTO categories (sort_no, name) VALUES (2, 'タイマルーフＴ型') ON DUPLICATE KEY UPDATE sort_no=VALUES(sort_no);
 INSERT INTO categories (sort_no, name) VALUES (3, 'タイマルーフＦ２５') ON DUPLICATE KEY UPDATE sort_no=VALUES(sort_no);

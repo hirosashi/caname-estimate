@@ -74,7 +74,7 @@
   function search(qs, cat, cb) {
     var key = cat + '|' + qs;
     if (cache[key]) return cb(cache[key]);
-    fetch(window.KANAME_SEARCH_URL + '?q=' + encodeURIComponent(qs) + '&category_id=' + cat, { credentials: 'same-origin' })
+    fetch(window.CANAME_SEARCH_URL + '?q=' + encodeURIComponent(qs) + '&category_id=' + cat, { credentials: 'same-origin' })
       .then(function (r) { return r.json(); })
       .then(function (list) { cache[key] = list; cb(list); })
       .catch(function () { cb([]); });
