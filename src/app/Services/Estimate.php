@@ -112,7 +112,7 @@ final class Estimate
             $l['labor_price'] = $laborPrice;
             $l['labor_cost'] = $laborCost;
             $l['unit_cost'] = $unitCost;
-            $l['rate'] = $l['rate_override'] === null ? $uniformRate : (float)$l['rate_override'];
+            $l['rate'] = $l['rate_override'] === null || (float)$l['rate_override'] <= 0 ? $uniformRate : (float)$l['rate_override'];
             $calc[(int)$l['id']] = $l;
         }
 
