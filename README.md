@@ -12,10 +12,10 @@ Excel「見積実行予算作成ツール」をWeb化したもの。素のPHP 8.
 ## ローカル起動
 ```bash
 cp src/config/config.sample.php src/config/config.local.php   # DB接続を編集
-mysql kaname_dev < db/schema.sql && mysql kaname_dev < db/seed_real.sql
+mysql caname_dev < db/schema.sql && mysql caname_dev < db/seed_real.sql
 php -S 127.0.0.1:8088 -t src dev_router.php
 ```
-初期管理者 `admin`（パスワードは seed 生成時の `KANAME_ADMIN_PW`。初回ログイン後に変更）。
+初期管理者 `admin`（パスワードは seed 生成時の `CANAME_ADMIN_PW`。初回ログイン後に変更）。
 
 ## 検査
 ```bash
@@ -27,5 +27,5 @@ python3 tests/smoke_post.py 2   # サーバ起動後
 ## 共通開発サイト（さくら）への反映
 - URL: https://jyunbi.sakura.ne.jp/caname （配置先 `/home/jyunbi/www/caname/`、`config/config.php` はサーバ側のみ・Git管理外）
 - 反映: `SAKURA_SSH_HOST/USER` と鍵 `~/.ssh/sakura_key` を用意して `./deploy.sh`
-- 反映後の確認: `KANAME_BASE=https://jyunbi.sakura.ne.jp/caname python3 tests/smoke_post.py 1`
+- 反映後の確認: `CANAME_BASE=https://jyunbi.sakura.ne.jp/caname python3 tests/smoke_post.py 1`
 - スキーマ変更は `db/schema.sql` に ALTER/CREATE を追記し、ローカル → 開発サイトの順に適用（DROP禁止）

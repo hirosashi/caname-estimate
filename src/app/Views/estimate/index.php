@@ -143,7 +143,7 @@ if ($cur !== null) {
     <div class="list"><table class="grid"><thead><tr><th>コード</th><th>カテゴリ</th><th>項目</th><th>材質</th><th>長</th><th>巾</th><th>単位</th><th>材料単価</th><th>歩掛</th><th>人工単価</th></tr></thead><tbody id="pk-body"></tbody></table></div>
   </div>
 </div>
-<script>window.KANAME_SEARCH_URL = <?= json_encode(App::url('/items/search'), JSON_UNESCAPED_SLASHES) ?>;</script>
+<script>window.CANAME_SEARCH_URL = <?= json_encode(App::url('/items/search'), JSON_UNESCAPED_SLASHES) ?>;</script>
 <?php else: ?>
 <div class="card"><p>工事項目がありません。上のフォームから追加してください。</p></div>
 <?php endif; ?>

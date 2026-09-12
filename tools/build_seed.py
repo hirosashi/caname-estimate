@@ -16,7 +16,7 @@ import openpyxl  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = sorted(glob.glob(os.path.join(ROOT, "tools/source/見積実行予算作成ツール*.xlsx")))
 OUT = os.path.join(ROOT, "db/seed_real.sql")
-ADMIN_PW = os.environ.get("KANAME_ADMIN_PW", "kaname2026")
+ADMIN_PW = os.environ.get("CANAME_ADMIN_PW", "caname2026")
 
 
 def q(v):
