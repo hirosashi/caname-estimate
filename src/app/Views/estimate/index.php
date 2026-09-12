@@ -90,17 +90,17 @@ if ($cur !== null) {
             <?php if ($can): ?><button type="button" class="btn sec sm pick" title="単価マスタから選ぶ">…</button><?php endif; ?></td>
         <td><input type="text" class="m name" name="<?= $k ?>[name]" value="<?= View::e($l['name'] ?? '') ?>" style="width:190px"<?= $ro ?>></td>
         <td><input type="text" class="s material" name="<?= $k ?>[material]" value="<?= View::e($l['material'] ?? '') ?>" style="width:110px"<?= $ro ?>></td>
-        <td><input type="number" step="any" class="xs num length" name="<?= $k ?>[length]" value="<?= View::e($l['length'] === null ? '' : (string)(float)$l['length']) ?>"<?= $ro ?>></td>
-        <td><input type="number" step="any" class="xs num width" name="<?= $k ?>[width]" value="<?= View::e($l['width'] === null ? '' : (string)(float)$l['width']) ?>"<?= $ro ?>></td>
-        <td><input type="number" step="any" class="xs num thickness" name="<?= $k ?>[thickness]" value="<?= View::e($l['thickness'] === null ? '' : (string)(float)$l['thickness']) ?>"<?= $ro ?>></td>
-        <td><input type="number" step="any" class="s num quantity" name="<?= $k ?>[quantity]" value="<?= View::e($l['quantity'] === null ? '' : (string)(float)$l['quantity']) ?>"<?= $ro ?>></td>
+        <td><input type="number" step="any" class="xs num length" name="<?= $k ?>[length]" value="<?= View::e(($l['length'] ?? null) === null ? '' : (string)(float)$l['length']) ?>"<?= $ro ?>></td>
+        <td><input type="number" step="any" class="xs num width" name="<?= $k ?>[width]" value="<?= View::e(($l['width'] ?? null) === null ? '' : (string)(float)$l['width']) ?>"<?= $ro ?>></td>
+        <td><input type="number" step="any" class="xs num thickness" name="<?= $k ?>[thickness]" value="<?= View::e(($l['thickness'] ?? null) === null ? '' : (string)(float)$l['thickness']) ?>"<?= $ro ?>></td>
+        <td><input type="number" step="any" class="s num quantity" name="<?= $k ?>[quantity]" value="<?= View::e(($l['quantity'] ?? null) === null ? '' : (string)(float)$l['quantity']) ?>"<?= $ro ?>></td>
         <td><input type="text" class="xs area_unit" name="<?= $k ?>[area_unit]" value="<?= View::e($l['area_unit'] ?? '') ?>" style="width:40px"<?= $ro ?>></td>
         <td class="num calc mat_count"><?= $fmt($l['mat_count'] ?? null) ?></td>
-        <td><input type="number" step="any" class="s num material_price" name="<?= $k ?>[material_price]" value="<?= View::e($l['material_price'] === null ? '' : (string)(float)$l['material_price']) ?>"<?= $ro ?>></td>
+        <td><input type="number" step="any" class="s num material_price" name="<?= $k ?>[material_price]" value="<?= View::e(($l['material_price'] ?? null) === null ? '' : (string)(float)$l['material_price']) ?>"<?= $ro ?>></td>
         <td class="num calc mat_cost"><?= $fmt($l['mat_cost'] ?? null) ?></td>
-        <td><input type="number" step="any" class="xs num labor_rate" name="<?= $k ?>[labor_rate]" value="<?= View::e($l['labor_rate'] === null ? '' : (string)(float)$l['labor_rate']) ?>"<?= $ro ?>></td>
+        <td><input type="number" step="any" class="xs num labor_rate" name="<?= $k ?>[labor_rate]" value="<?= View::e(($l['labor_rate'] ?? null) === null ? '' : (string)(float)$l['labor_rate']) ?>"<?= $ro ?>></td>
         <td class="num calc labor_count"><?= $fmt($l['labor_count'] ?? null, 2) ?></td>
-        <td><input type="number" step="any" class="s num labor_unit_price" name="<?= $k ?>[labor_unit_price]" value="<?= View::e($l['labor_unit_price'] === null ? '' : (string)(float)$l['labor_unit_price']) ?>"<?= $ro ?>><?php if ($project['uniform_labor_price'] !== null): ?><div class="muted" style="font-size:10px">一律 <?= $fmt($project['uniform_labor_price']) ?></div><?php endif; ?></td>
+        <td><input type="number" step="any" class="s num labor_unit_price" name="<?= $k ?>[labor_unit_price]" value="<?= View::e(($l['labor_unit_price'] ?? null) === null ? '' : (string)(float)$l['labor_unit_price']) ?>"<?= $ro ?>><?php if ($project['uniform_labor_price'] !== null): ?><div class="muted" style="font-size:10px">一律 <?= $fmt($project['uniform_labor_price']) ?></div><?php endif; ?></td>
         <td class="num calc labor_cost"><?= $fmt($l['labor_cost'] ?? null) ?></td>
         <td class="num calc unit_cost"><?= $fmt($l['unit_cost'] ?? null, 1) ?></td>
         <td class="center"><input type="checkbox" class="is_quote" name="<?= $k ?>[is_quote]" value="1" <?= $l !== null && (int)$l['is_quote'] === 1 ? 'checked' : '' ?><?= $ro ?>></td>
