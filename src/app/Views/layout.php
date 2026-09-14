@@ -64,7 +64,7 @@ $masterTabs = [
   </nav>
 </div>
 <?php endif; ?>
-<main class="page">
+<main class="page<?= !empty($wide) ? ' wide' : '' ?>">
   <?php foreach ($flashes as $f): ?>
     <div class="flash <?= View::e($f['kind']) ?>"><?= View::e($f['message']) ?></div>
   <?php endforeach; ?>
