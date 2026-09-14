@@ -20,6 +20,7 @@ final class PrintController extends Base
         $sum = Estimate::summary($p, $est);
         $company = App::config()['company'] ?? [];
         View::render('print/estimate', [
+            'landscape' => true,
             'title' => '見積書',
             'project' => $p,
             'est' => $est,

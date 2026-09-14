@@ -11,7 +11,7 @@ use App\Core\View;
 <title><?= View::e($title ?? '') ?> <?= View::e($project['name'] ?? '') ?></title>
 <link rel="stylesheet" href="<?= View::e(App::url('/assets/print.css')) ?>">
 </head>
-<body class="print">
+<body class="print<?= !empty($landscape) ? ' land' : '' ?>">
 <div class="noprint toolbar">
   <button onclick="window.print()">印刷 / PDF保存</button>
   <a href="<?= View::e(App::url('/estimate?project_id=' . (int)($project['id'] ?? 0))) ?>">明細書へ戻る</a>

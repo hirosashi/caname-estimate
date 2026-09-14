@@ -2,7 +2,7 @@
 use App\Core\View;
 
 /** @var array<string,mixed> $project @var array<string,mixed> $est @var array<string,mixed> $sum @var array<string,mixed> $company @var array<int,array<string,mixed>> $notes @var bool $withCost */
-$perPage = 28;
+$perPage = 25;
 $tax = $sum['quote_total'] * (float)$project['tax_rate'];
 $dim = static fn(mixed $v): string => $v === null ? '' : View::dec($v, 3);
 $pageNo = 1;
@@ -57,7 +57,7 @@ if ($notes !== []) {
   <div class="sheet">
     <div class="page-title"><span><?= (int)$s['sort_no'] ?>. <?= View::e($s['name']) ?></span><span><?= View::e($project['name']) ?></span></div>
     <table class="det">
-      <thead><tr><th style="width:7mm">No</th><th>名称</th><th style="width:26mm">材質</th><th style="width:11mm">長</th><th style="width:11mm">巾</th><th style="width:11mm">厚</th><th style="width:10mm">単位</th><th style="width:14mm">数量</th><th style="width:18mm">単価</th><th style="width:24mm">金額</th><th style="width:22mm">備考</th><?php if ($withCost): ?><th style="width:16mm">原単価</th><?php endif; ?></tr></thead>
+      <thead><tr><th style="width:7mm">No</th><th>名称</th><th style="width:44mm">材質</th><th style="width:11mm">長</th><th style="width:11mm">巾</th><th style="width:11mm">厚</th><th style="width:10mm">単位</th><th style="width:14mm">数量</th><th style="width:18mm">単価</th><th style="width:24mm">金額</th><th style="width:32mm">備考</th><?php if ($withCost): ?><th style="width:16mm">原単価</th><?php endif; ?></tr></thead>
       <tbody>
       <?php foreach ($chunk as $i => $r): ?>
         <tr>

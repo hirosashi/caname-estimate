@@ -5,7 +5,8 @@ body{margin:0;font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",ser
 .toolbar button{padding:4px 12px}
 .sheet{background:#fff;width:210mm;min-height:296mm;margin:10px auto;padding:15mm 14mm;position:relative;page-break-after:always}
 .sheet:last-child{page-break-after:auto}
-.sheet.land{width:297mm;min-height:209mm}
+body.land .sheet{width:297mm;min-height:209mm;padding:12mm 14mm}
+body.land .company{bottom:14mm}
 h1.doc{text-align:center;font-size:22pt;letter-spacing:.6em;margin:6mm 0 10mm;border-bottom:2px solid #000;display:inline-block;padding:0 12mm 2mm}
 .center{text-align:center}
 .right{text-align:right}
@@ -32,3 +33,22 @@ table.det tr.total td{font-weight:bold;background:#e8e8e8}
   .sheet{margin:0;width:auto;min-height:auto;padding:12mm 10mm;box-shadow:none}
   @page{size:A4 portrait;margin:0}
 }
+@page land{size:A4 landscape;margin:0}
+body.land .sheet{page:land}
+body.land table.det{font-size:9pt;margin-top:2mm;table-layout:fixed}
+body.land table.det th,body.land table.det td{height:5.6mm;padding:0.5mm 1.2mm;white-space:nowrap;overflow:hidden}
+body.land table.det td.num{text-overflow:ellipsis}
+body.land .cover table.det th,body.land .cover table.det td{height:5.2mm}
+body.land .cover .company{position:static;margin-top:3mm;font-size:9pt;line-height:1.4}
+body.land .cover .company .name{font-size:11pt}
+body.land h1.doc{margin:1mm 0 3mm;font-size:18pt;padding-bottom:1mm}
+body.land .cover .to,body.land .cover .amount{margin:2mm 0}
+body.land .cover .amount{font-size:16pt;padding:1mm 4mm}
+body.land .cover p{margin:1mm 0}
+body.land .cover table.meta{margin-top:2mm}
+body.land .cover table.meta th,body.land .cover table.meta td{padding:0.8mm 0}
+body.land .pageno{bottom:4mm}
+@media print{ body.land .sheet{padding:9mm 12mm} }
+body.land .notes ol{line-height:1.45;font-size:10pt}
+body.land .cover .company{margin-top:2mm;line-height:1.3}
+body.land .cover .company{position:absolute;right:14mm;top:31mm;margin:0;bottom:auto}
