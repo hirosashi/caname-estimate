@@ -29,6 +29,7 @@ final class EstimateController extends Base
             $open = (int)$est['sections'][0]['id'];
         }
         View::render('estimate/index', [
+            'wide' => true,
             'title' => '明細書',
             'project' => $p,
             'est' => $est,

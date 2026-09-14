@@ -25,8 +25,8 @@ if ($cur !== null) {
 <div class="card">
   <form method="post" action="<?= View::e(App::url('/estimate/settings')) ?>" class="row">
     <?= Csrf::field() ?><input type="hidden" name="project_id" value="<?= $pid ?>">
-    <div><label>一律人工単価（空欄なら品目の人工単価）</label><input type="number" step="1" class="num" name="uniform_labor_price" value="<?= View::e($project['uniform_labor_price'] === null ? '' : (string)(float)$project['uniform_labor_price']) ?>" style="width:140px"<?= $ro ?>></div>
-    <div><label>一律掛率（原価÷掛率＝見積単価）</label><input type="number" step="0.01" min="0.01" max="1" class="num" name="uniform_rate" value="<?= View::e((string)(float)$project['uniform_rate']) ?>" style="width:100px"<?= $ro ?>></div>
+    <div><label>一律人工単価（空欄なら品目の人工単価）</label><input type="number" step="1" class="num" name="uniform_labor_price" value="<?= View::e($project['uniform_labor_price'] === null ? '' : (string)(float)$project['uniform_labor_price']) ?>"<?= $ro ?>></div>
+    <div><label>一律掛率（原価÷掛率＝見積単価）</label><input type="number" step="0.01" min="0.01" max="1" class="num" name="uniform_rate" value="<?= View::e((string)(float)$project['uniform_rate']) ?>"<?= $ro ?>></div>
     <?php if ($can): ?><div><button class="btn sec">設定を保存</button></div><?php endif; ?>
     <div style="margin-left:auto" class="right">
       <div class="muted">材料代合計 <?= View::yen($est['material_total']) ?>　手間代合計 <?= View::yen($est['labor_total']) ?>（<?= $fmt($est['labor_count_total'], 2) ?> 人工）</div>
@@ -45,7 +45,7 @@ if ($cur !== null) {
   <?php if ($can && count($est['sections']) < 15): ?>
   <form method="post" action="<?= View::e(App::url('/estimate/section/add')) ?>" class="row">
     <?= Csrf::field() ?><input type="hidden" name="project_id" value="<?= $pid ?>">
-    <div><input type="text" name="name" placeholder="新しい工事項目名（例 屋根工事）" style="width:280px"></div>
+    <div><input type="text" name="name" placeholder="新しい工事項目名（例 屋根工事）"></div>
     <div><button class="btn sm">工事項目を追加</button></div>
   </form>
   <?php endif; ?>
@@ -55,8 +55,8 @@ if ($cur !== null) {
 <div class="card">
   <form method="post" action="<?= View::e(App::url('/estimate/section/save')) ?>" class="row">
     <?= Csrf::field() ?><input type="hidden" name="project_id" value="<?= $pid ?>"><input type="hidden" name="section_id" value="<?= (int)$cur['id'] ?>">
-    <div><label>工事項目名</label><input type="text" name="name" value="<?= View::e($cur['name']) ?>" style="width:320px"<?= $ro ?>></div>
-    <div><label>ロス率（例 0.07）</label><input type="number" step="0.01" min="0" max="1" name="loss_rate" class="num" value="<?= View::e((string)(float)$cur['loss_rate']) ?>" style="width:90px"<?= $ro ?>></div>
+    <div><label>工事項目名</label><input type="text" name="name" value="<?= View::e($cur['name']) ?>"<?= $ro ?>></div>
+    <div><label>ロス率（例 0.07）</label><input type="number" step="0.01" min="0" max="1" name="loss_rate" class="num" value="<?= View::e((string)(float)$cur['loss_rate']) ?>"<?= $ro ?>></div>
     <?php if ($can): ?>
       <div><button class="btn sec sm">項目を保存</button></div>
       <div><button class="btn sec sm" formaction="<?= View::e(App::url('/estimate/section/move')) ?>" name="dir" value="up">↑</button>
@@ -69,8 +69,16 @@ if ($cur !== null) {
 
 <form method="post" action="<?= View::e(App::url('/estimate/lines/save')) ?>" id="lines-form" data-loss="<?= (float)$cur['loss_rate'] ?>" data-labor="<?= $project['uniform_labor_price'] === null ? '' : (float)$project['uniform_labor_price'] ?>" data-rate="<?= (float)$project['uniform_rate'] ?>">
 <?= Csrf::field() ?><input type="hidden" name="project_id" value="<?= $pid ?>"><input type="hidden" name="section_id" value="<?= (int)$cur['id'] ?>">
-<div class="card" style="overflow-x:auto">
+<div class="card wide-card">
   <table class="grid" id="lines">
+    <colgroup>
+      <col style="width:2%"><col style="width:5%"><col style="width:9%"><col style="width:6%">
+      <col style="width:3%"><col style="width:3%"><col style="width:3%"><col style="width:4%"><col style="width:2.5%">
+      <col style="width:3.5%"><col style="width:4%"><col style="width:4.5%">
+      <col style="width:3%"><col style="width:3.5%"><col style="width:4%"><col style="width:4.5%">
+      <col style="width:4%"><col style="width:2.5%"><col style="width:3%">
+      <col style="width:4%"><col style="width:3%"><col style="width:4.5%"><col style="width:5%"><col style="width:9%">
+    </colgroup>
     <thead>
       <tr>
         <th rowspan="2">No</th><th rowspan="2">コード</th><th rowspan="2">項目</th><th rowspan="2">材質</th>
@@ -86,15 +94,15 @@ if ($cur !== null) {
     <?php for ($i = 0; $i < $maxLines; $i++): $l = $cur['lines'][$i] ?? null; $n = $i + 1; $k = "rows[$i]"; ?>
       <tr class="<?= $l !== null && (int)$l['is_quote'] === 1 ? 'quote' : '' ?>" data-i="<?= $i ?>">
         <td class="num"><?= $n ?><input type="hidden" name="<?= $k ?>[id]" value="<?= $l === null ? 0 : (int)$l['id'] ?>"></td>
-        <td><input type="text" class="s code" name="<?= $k ?>[item_code]" value="<?= View::e($l['item_code'] ?? '') ?>" list="" autocomplete="off"<?= $ro ?>>
+        <td class="codecell"><input type="text" class="s code" name="<?= $k ?>[item_code]" value="<?= View::e($l['item_code'] ?? '') ?>" list="" autocomplete="off"<?= $ro ?>>
             <?php if ($can): ?><button type="button" class="btn sec sm pick" title="単価マスタから選ぶ">…</button><?php endif; ?></td>
-        <td><input type="text" class="m name" name="<?= $k ?>[name]" value="<?= View::e($l['name'] ?? '') ?>" style="width:190px"<?= $ro ?>></td>
-        <td><input type="text" class="s material" name="<?= $k ?>[material]" value="<?= View::e($l['material'] ?? '') ?>" style="width:110px"<?= $ro ?>></td>
+        <td><input type="text" class="m name" name="<?= $k ?>[name]" value="<?= View::e($l['name'] ?? '') ?>"<?= $ro ?>></td>
+        <td><input type="text" class="s material" name="<?= $k ?>[material]" value="<?= View::e($l['material'] ?? '') ?>"<?= $ro ?>></td>
         <td><input type="number" step="any" class="xs num length" name="<?= $k ?>[length]" value="<?= View::e(($l['length'] ?? null) === null ? '' : (string)(float)$l['length']) ?>"<?= $ro ?>></td>
         <td><input type="number" step="any" class="xs num width" name="<?= $k ?>[width]" value="<?= View::e(($l['width'] ?? null) === null ? '' : (string)(float)$l['width']) ?>"<?= $ro ?>></td>
         <td><input type="number" step="any" class="xs num thickness" name="<?= $k ?>[thickness]" value="<?= View::e(($l['thickness'] ?? null) === null ? '' : (string)(float)$l['thickness']) ?>"<?= $ro ?>></td>
         <td><input type="number" step="any" class="s num quantity" name="<?= $k ?>[quantity]" value="<?= View::e(($l['quantity'] ?? null) === null ? '' : (string)(float)$l['quantity']) ?>"<?= $ro ?>></td>
-        <td><input type="text" class="xs area_unit" name="<?= $k ?>[area_unit]" value="<?= View::e($l['area_unit'] ?? '') ?>" style="width:40px"<?= $ro ?>></td>
+        <td><input type="text" class="xs area_unit" name="<?= $k ?>[area_unit]" value="<?= View::e($l['area_unit'] ?? '') ?>"<?= $ro ?>></td>
         <td class="num calc mat_count"><?= $fmt($l['mat_count'] ?? null) ?></td>
         <td><input type="number" step="any" class="s num material_price" name="<?= $k ?>[material_price]" value="<?= View::e(($l['material_price'] ?? null) === null ? '' : (string)(float)$l['material_price']) ?>"<?= $ro ?>></td>
         <td class="num calc mat_cost"><?= $fmt($l['mat_cost'] ?? null) ?></td>
@@ -104,14 +112,14 @@ if ($cur !== null) {
         <td class="num calc labor_cost"><?= $fmt($l['labor_cost'] ?? null) ?></td>
         <td class="num calc unit_cost"><?= $fmt($l['unit_cost'] ?? null, 1) ?></td>
         <td class="center"><input type="checkbox" class="is_quote" name="<?= $k ?>[is_quote]" value="1" <?= $l !== null && (int)$l['is_quote'] === 1 ? 'checked' : '' ?><?= $ro ?>></td>
-        <td><input type="number" class="xs num merge_no" name="<?= $k ?>[merge_no]" min="1" max="<?= $maxLines ?>" value="<?= $l !== null && $l['merge_into_line_id'] !== null && isset($lineNo[(int)$l['merge_into_line_id']]) ? $lineNo[(int)$l['merge_into_line_id']] : '' ?>" style="width:44px"<?= $ro ?>></td>
+        <td><input type="number" class="xs num merge_no" name="<?= $k ?>[merge_no]" min="1" max="<?= $maxLines ?>" value="<?= $l !== null && $l['merge_into_line_id'] !== null && isset($lineNo[(int)$l['merge_into_line_id']]) ? $lineNo[(int)$l['merge_into_line_id']] : '' ?>"<?= $ro ?>></td>
         <td class="num calc merged_unit_cost"><?= $fmt($l['merged_unit_cost'] ?? null, 1) ?></td>
-        <td><input type="number" step="0.01" class="xs num rate_override" name="<?= $k ?>[rate_override]" value="<?= View::e($l === null || $l['rate_override'] === null ? '' : (string)(float)$l['rate_override']) ?>" placeholder="<?= (float)$project['uniform_rate'] ?>" style="width:50px"<?= $ro ?>></td>
+        <td><input type="number" step="0.01" class="xs num rate_override" name="<?= $k ?>[rate_override]" value="<?= View::e($l === null || $l['rate_override'] === null ? '' : (string)(float)$l['rate_override']) ?>" placeholder="<?= (float)$project['uniform_rate'] ?>"<?= $ro ?>></td>
         <td class="num calc quote_price"><?= $fmt($l['quote_price'] ?? null) ?></td>
         <td class="num calc quote_amount"><?= $fmt($l['quote_amount'] ?? null) ?></td>
-        <td><input type="text" name="<?= $k ?>[print_name]" value="<?= View::e($l['print_name'] ?? '') ?>" placeholder="表示名（空欄=項目名）" style="width:150px"<?= $ro ?>>
-            <input type="text" name="<?= $k ?>[print_material]" value="<?= View::e($l['print_material'] ?? '') ?>" placeholder="材質表示" style="width:90px"<?= $ro ?>>
-            <input type="text" name="<?= $k ?>[remarks]" value="<?= View::e($l['remarks'] ?? '') ?>" placeholder="備考" style="width:120px"<?= $ro ?>></td>
+        <td class="printcell"><input type="text" name="<?= $k ?>[print_name]" value="<?= View::e($l['print_name'] ?? '') ?>" placeholder="表示名（空欄=項目名）"<?= $ro ?>>
+            <input type="text" name="<?= $k ?>[print_material]" value="<?= View::e($l['print_material'] ?? '') ?>" placeholder="材質表示"<?= $ro ?>>
+            <input type="text" name="<?= $k ?>[remarks]" value="<?= View::e($l['remarks'] ?? '') ?>" placeholder="備考"<?= $ro ?>></td>
       </tr>
     <?php endfor; ?>
     </tbody>
