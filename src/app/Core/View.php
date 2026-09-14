@@ -29,7 +29,9 @@ final class View
             return '';
         }
         $s = number_format((float)$v, $maxDec, '.', '');
-        $s = rtrim(rtrim($s, '0'), '.');
+        if (str_contains($s, '.')) {
+            $s = rtrim(rtrim($s, '0'), '.');
+        }
         return $s === '' || $s === '-0' ? '0' : $s;
     }
 

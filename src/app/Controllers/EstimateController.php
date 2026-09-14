@@ -147,10 +147,10 @@ final class EstimateController extends Base
                 $byId[(int)$e['id']] = $e;
             }
             $keep = [];
-            $mergeReq = []; // 新ID => 合算先の行番号(1始まり)
-            $noToId = [];
+            $mergeReq = []; // 新ID => 合算先の画面上の行No(1始まり)
+            $noToId = [];   // 画面上の行No => ID
             $sort = 0;
-            foreach ($rows as $r) {
+            foreach ($rows as $idx => $r) {
                 if (!is_array($r)) {
                     continue;
                 }
@@ -179,7 +179,7 @@ final class EstimateController extends Base
                     'quantity' => $qty,
                     'is_quote' => (isset($r['is_quote']) && (string)$r['is_quote'] === '1') ? 1 : 0,
                     'merge_into_line_id' => null,
-                    'rate_override' => Validator::toNum($r['rate_override'] ?? null),
+                    'rate_override' => ($ro = Validator::toNum($r['rate_override'] ?? null)) !== null && $ro > 0 ? $ro : null,
                     'print_name' => $printName === null ? null : mb_substr($printName, 0, 200),
                     'print_material' => Validator::toStr($r['print_material'] ?? null),
                     'remarks' => $remarks === null ? null : mb_substr($remarks, 0, 200),
@@ -222,7 +222,7 @@ final class EstimateController extends Base
                     $newId = Db::lastId();
                 }
                 $keep[] = $newId;
-                $noToId[$sort] = $newId;
+                $noToId[(int)$idx + 1] = $newId;
                 $mergeNo = (int)($r['merge_no'] ?? 0);
                 if ($data['is_quote'] === 0 && $mergeNo > 0) {
                     $mergeReq[$newId] = $mergeNo;

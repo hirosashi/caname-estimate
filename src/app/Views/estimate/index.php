@@ -114,6 +114,8 @@ if ($cur !== null) {
         <td class="center"><input type="checkbox" class="is_quote" name="<?= $k ?>[is_quote]" value="1" <?= $l !== null && (int)$l['is_quote'] === 1 ? 'checked' : '' ?><?= $ro ?>></td>
         <td><input type="number" class="xs num merge_no" name="<?= $k ?>[merge_no]" min="1" max="<?= $maxLines ?>" value="<?= $l !== null && $l['merge_into_line_id'] !== null && isset($lineNo[(int)$l['merge_into_line_id']]) ? $lineNo[(int)$l['merge_into_line_id']] : '' ?>"<?= $ro ?>></td>
         <td class="num calc merged_unit_cost"><?= $fmt($l['merged_unit_cost'] ?? null, 1) ?></td>
+        <td><input type="number" step="0.01" min="0.01" max="1" class="xs num rate_override" name="<?= $k ?>[rate_override]" value="<?= View::e($l === null || $l['rate_override'] === null ? '' : (string)(float)$l['rate_override']) ?>" placeholder="<?= (float)$project['uniform_rate'] ?>"<?= $ro ?>></td>
+||||||| 1e5186f
         <td><input type="number" step="0.01" class="xs num rate_override" name="<?= $k ?>[rate_override]" value="<?= View::e($l === null || $l['rate_override'] === null ? '' : (string)(float)$l['rate_override']) ?>" placeholder="<?= (float)$project['uniform_rate'] ?>"<?= $ro ?>></td>
         <td class="num calc quote_price"><?= $fmt($l['quote_price'] ?? null) ?></td>
         <td class="num calc quote_amount"><?= $fmt($l['quote_amount'] ?? null) ?></td>
