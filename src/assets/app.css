@@ -14,6 +14,7 @@ button.link{background:none;border:0;color:#fff;cursor:pointer;text-decoration:u
 .tabs a{display:inline-block;padding:8px 14px;text-decoration:none;color:#374151;border:1px solid transparent;border-bottom:0;border-radius:6px 6px 0 0}
 .tabs a.on{background:#f3f4f6;border-color:#d1d5db;font-weight:bold;color:#111}
 .page{padding:16px;max-width:1500px;margin:0 auto}
+.page.wide{max-width:none;padding:12px}
 .page.narrow{max-width:420px;margin-top:80px}
 .card{background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:14px 16px;margin-bottom:14px}
 .card h2{font-size:15px;margin:0 0 10px;border-left:4px solid #f59e0b;padding-left:8px}
@@ -61,3 +62,16 @@ textarea{width:100%}
 #picker .list{overflow:auto;padding:0 10px 10px}
 #picker table tr:hover td{background:#eff6ff;cursor:pointer}
 .sticky-actions{position:sticky;bottom:0;background:#fff;border-top:1px solid #d1d5db;padding:8px;margin:0 -16px -14px;text-align:right}
+
+/* 明細書: ブラウザ幅いっぱいに全列を表示 */
+#lines{table-layout:fixed;width:100%}
+#lines th,#lines td{padding:2px 3px;font-size:12px;overflow:hidden}
+#lines th{white-space:normal;line-height:1.2}
+#lines input{width:100%;min-width:0;padding:2px 3px;font-size:12px;box-sizing:border-box}
+#lines input[type=checkbox]{width:auto}
+#lines td.calc{white-space:nowrap;text-overflow:ellipsis}
+#lines td.codecell{white-space:nowrap}
+#lines td.codecell input{width:calc(100% - 26px)}
+#lines td.codecell .btn.sm{padding:2px 4px;margin-left:2px;vertical-align:middle}
+#lines td.printcell input{display:block;margin:1px 0}
+@media (max-width:1400px){#lines th,#lines td,#lines input{font-size:11px}}
