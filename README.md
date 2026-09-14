@@ -29,3 +29,7 @@ python3 tests/smoke_post.py 2   # サーバ起動後
 - 反映: `SAKURA_SSH_HOST/USER` と鍵 `~/.ssh/sakura_key` を用意して `./deploy.sh`
 - 反映後の確認: `CANAME_BASE=https://jyunbi.sakura.ne.jp/caname python3 tests/smoke_post.py 1`
 - スキーマ変更は `db/schema.sql` に ALTER/CREATE を追記し、ローカル → 開発サイトの順に適用（DROP禁止）
+
+### 開発サイトの Basic 認証
+
+開発サイトはサーバ側の `~/.caname_htpasswd` と `~/.caname_auth.htaccess` で Basic 認証をかけている（Git 管理外）。`deploy.sh` は展開後にこの設定を `.htaccess` 末尾へ追記するので、反映しても認証は外れない。
